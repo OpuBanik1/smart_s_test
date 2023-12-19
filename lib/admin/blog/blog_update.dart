@@ -29,9 +29,9 @@ class BlogUpdate extends StatelessWidget {
             ),
             Container(
               height: 30,
-              width: 60,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              width: 80,
+              decoration: BoxDecoration(
+                  color: Colors.amber, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
                 onPressed: () {
                   CusttomHttp.update(idController);

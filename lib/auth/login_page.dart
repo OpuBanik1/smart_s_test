@@ -66,8 +66,8 @@ class _Login_pageState extends State<Login_page> {
         body: Form(
             key: _fromKey,
             child: Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.all(20),
+              margin: EdgeInsets.only(top: 5, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 20),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
@@ -126,7 +126,9 @@ class _Login_pageState extends State<Login_page> {
                           suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  passwordVisible == false;
+                                  passwordVisible == true
+                                      ? passwordVisible = false
+                                      : passwordVisible = true;
                                 });
                               },
                               child: Icon(Icons.visibility)),

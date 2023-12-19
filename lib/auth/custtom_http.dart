@@ -7,6 +7,7 @@ import 'package:smart_s_test/constant/constant.dart';
 import 'package:smart_s_test/model/blog_model.dart';
 
 class CusttomHttp {
+  //Future<Map<String,String>>getHeadersWithToken(){}
   static getHeadersWithToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var header = {

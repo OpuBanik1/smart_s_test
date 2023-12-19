@@ -41,6 +41,8 @@ class _BlogListState extends State<BlogList> {
         centerTitle: true,
       ),
       body: Container(
+        height: double.infinity,
+        width: double.infinity,
         padding: EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
@@ -115,24 +117,26 @@ class _BlogListState extends State<BlogList> {
                     ),
                   ),
                   Positioned(
-                      bottom: 10,
+                      top: 100,
                       left: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => BlogUpdate()));
-                              },
-                              icon: Icon(Icons.update_rounded)),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => BlogDelte()));
-                              },
-                              icon: Icon(Icons.delete))
-                        ],
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => BlogUpdate()));
+                                },
+                                icon: Icon(Icons.update_rounded)),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => BlogDelte()));
+                                },
+                                icon: Icon(Icons.delete))
+                          ],
+                        ),
                       ))
                 ],
               ),
