@@ -181,24 +181,34 @@ class _BlogListState extends State<BlogList> {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    } else if (snapshot.hasError) {
-                      return Text('Error 404');
-                    } else if (snapshot.data == null) {
-                      return Text("No data found");
                     }
-                    return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data?.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            child: Column(
-                              children: [
-                                _launchURL('${snapshot.data![index].url}')
-                              ],
-                            ),
-                          );
-                        });
+                    else if (snapshot.hasError) {
+                      return Text(snapshot.hasError.toString());
+                    }
+                    return Container(
+                       height: 700,
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data?.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return
+
+                            //  Text(index.toString());
+
+                              Container(
+                              child: Column(
+                                children: [
+                                  Text(index.toString()),
+                                  Text(snapshot.data![index].title.toString()),
+                                  Text(snapshot.data![index].description.toString()),
+                                 // _launchURL('${snapshot.data![index].url}')
+                                ],
+                              ),
+                            );
+                          }),
+                    );
+
                   })
             ],
           ),

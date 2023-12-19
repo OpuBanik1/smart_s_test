@@ -12,7 +12,7 @@ class CusttomHttp {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var header = {
       'Accept': 'application/json',
-      'Authorization': 'Bearer token ${sharedPreferences.getString('token')}',
+      'Authorization': 'Bearer ${sharedPreferences.getString('token')}',
     };
 
     return header;
@@ -24,10 +24,12 @@ class CusttomHttp {
     String link = '$baseUrl/admin/blog-news?page=$pageNo';
     var response = await http.get(Uri.parse(link),
         headers: await CusttomHttp.getHeadersWithToken());
+
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        for (var i in data) {
+        print(data['data']['blogs']['data']);
+        for (var i in data['data']['blogs']['data']) {
           blogModel = BlogModel.fromJson(i);
           blogList.add(blogModel);
         }
