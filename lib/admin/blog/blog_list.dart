@@ -41,8 +41,6 @@ class _BlogListState extends State<BlogList> {
         centerTitle: true,
       ),
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
         padding: EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
@@ -181,34 +179,29 @@ class _BlogListState extends State<BlogList> {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    }
-                    else if (snapshot.hasError) {
+                    } else if (snapshot.hasError) {
                       return Text(snapshot.hasError.toString());
                     }
                     return Container(
-                       height: 700,
+                      height: 400,
                       child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          // physics: NeverScrollableScrollPhysics(),
                           itemCount: snapshot.data?.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return
-
-                            //  Text(index.toString());
-
-                              Container(
-                              child: Column(
-                                children: [
-                                  Text(index.toString()),
-                                  Text(snapshot.data![index].title.toString()),
-                                  Text(snapshot.data![index].description.toString()),
-                                 // _launchURL('${snapshot.data![index].url}')
-                                ],
-                              ),
-                            );
+                            return Container(
+                                width: 100,
+                                child: ListTile(
+                                  leading: Title(
+                                      color: Colors.white,
+                                      child: Text(snapshot.data![index].title
+                                          .toString())),
+                                  subtitle: Text(snapshot
+                                      .data![index].description
+                                      .toString()),
+                                ));
                           }),
                     );
-
                   })
             ],
           ),
