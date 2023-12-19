@@ -15,10 +15,10 @@ class _BlogStoreState extends State<BlogStore> {
   GlobalKey<ScaffoldState> _fromKey = GlobalKey();
   TextEditingController titleController = TextEditingController();
   TextEditingController sub_titleController = TextEditingController();
-  TextEditingController slugController = TextEditingController();
+  // TextEditingController slugController = TextEditingController();
   TextEditingController descreptionController = TextEditingController();
-  TextEditingController idController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
+  // TextEditingController idController = TextEditingController();
+  // TextEditingController dateController = TextEditingController();
 
   blogPass() async {
     var link = '${baseUrl}/admin/blog-news/store';
@@ -26,14 +26,19 @@ class _BlogStoreState extends State<BlogStore> {
     var map = Map<String, dynamic>();
     map['title'] = titleController.text.toString();
     map['subtitle'] = sub_titleController.text.toString();
-    map['slug'] = slugController.text.toString();
     map['description'] = descreptionController.text.toString();
-    map['category_id'] = idController.toString();
-    map['date'] = dateController.text.toString();
+    // map['category_id'] = idController.toString();
+
     var response = await http.post(Uri.parse(link),
-        body: map, headers: CusttomHttp.getHeadersWithToken());
-    if (response.statusCode == 200) {
-      return showToast("Blog stored");
+        body: map, headers: await CusttomHttp.getHeadersWithToken());
+    try {
+      if (response.statusCode == 200) {
+        return showToast("Blog stored");
+      } else {
+        throw Text("OPPs! something error");
+      }
+    } catch (e) {
+      throw (e.toString());
     }
   }
 
@@ -83,24 +88,24 @@ class _BlogStoreState extends State<BlogStore> {
                         borderRadius: BorderRadius.circular(12),
                       )),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  controller: slugController,
-                  decoration: InputDecoration(
-                      hintText: "Slug",
-                      labelText: "Slug",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      )),
-                ),
+                // SizedBox(
+                //   height: 5,
+                // ),
+                // TextField(
+                //   controller: slugController,
+                //   decoration: InputDecoration(
+                //       hintText: "Slug",
+                //       labelText: "Slug",
+                //       border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       )),
+                // ),
                 SizedBox(
                   height: 5,
                 ),
                 TextField(
                   controller: descreptionController,
-                  maxLines: 5,
+                  maxLines: 4,
                   decoration: InputDecoration(
                       hintText: "description",
                       labelText: "Write the description",
@@ -111,28 +116,28 @@ class _BlogStoreState extends State<BlogStore> {
                 SizedBox(
                   height: 5,
                 ),
-                TextField(
-                  controller: idController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: "category_id",
-                      labelText: "enter the id",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      )),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  controller: dateController,
-                  decoration: InputDecoration(
-                      hintText: "date",
-                      labelText: "date",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      )),
-                ),
+                // TextField(
+                //   controller: idController,
+                //   keyboardType: TextInputType.number,
+                //   decoration: InputDecoration(
+                //       hintText: "category_id",
+                //       labelText: "enter the id",
+                //       border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       )),
+                // ),
+                // SizedBox(
+                //   height: 5,
+                // ),
+                // TextField(
+                //   controller: dateController,
+                //   decoration: InputDecoration(
+                //       hintText: "date",
+                //       labelText: "date",
+                //       border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       )),
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -140,7 +145,9 @@ class _BlogStoreState extends State<BlogStore> {
                   height: 30,
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        blogPass();
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber),
                       child: Text(

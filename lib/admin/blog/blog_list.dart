@@ -41,6 +41,7 @@ class _BlogListState extends State<BlogList> {
         centerTitle: true,
       ),
       body: Container(
+        height: 600,
         padding: EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
@@ -114,64 +115,8 @@ class _BlogListState extends State<BlogList> {
                           )),
                     ),
                   ),
-                  Positioned(
-                      top: 100,
-                      left: 10,
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => BlogUpdate()));
-                                },
-                                icon: Icon(Icons.update_rounded)),
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => BlogDelte()));
-                                },
-                                icon: Icon(Icons.delete))
-                          ],
-                        ),
-                      ))
                 ],
               ),
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: Container(
-              //     margin: EdgeInsets.all(10),
-              //     padding: EdgeInsets.all(8),
-              //     color: Colors.blue,
-              //     height: 60,
-              //     child: DropdownButton<String>(
-              //       value: sortBy,
-              //       icon: const Icon(Icons.arrow_downward),
-              //       elevation: 16,
-              //       style: const TextStyle(color: Colors.deepPurpleAccent),
-              //       underline: Container(
-              //         height: 2,
-              //         color: Colors.deepPurpleAccent,
-              //       ),
-              //       onChanged: (String? value) {
-              //         // This is called when the user selects an item.
-              //         setState(() {
-              //           sortBy = value!;
-              //         });
-              //       },
-              //       items: list.map<DropdownMenuItem<String>>((String value) {
-              //         return DropdownMenuItem<String>(
-              //           value: value,
-              //           child: Text(
-              //             value,
-              //             style: myStyle(20, Colors.blueGrey),
-              //           ),
-              //         );
-              //       }).toList(),
-              //     ),
-              //   ),
-              // ),
               FutureBuilder<List<BlogModel>>(
                   future: CusttomHttp.fetchBlogList(currentIndex),
                   builder: (context, snapshot) {
@@ -190,19 +135,50 @@ class _BlogListState extends State<BlogList> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Container(
-                                width: 100,
-                                child: ListTile(
-                                  leading: Title(
-                                      color: Colors.white,
-                                      child: Text(snapshot.data![index].title
-                                          .toString())),
-                                  subtitle: Text(snapshot
-                                      .data![index].description
-                                      .toString()),
-                                ));
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(snapshot.data![index].title
+                                            .toString()),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                            "Id:${snapshot.data![index].id.toString()}")
+                                      ],
+                                    ),
+                                    Text(
+                                        "Description: ${snapshot.data![index].description}")
+                                  ]),
+                            );
                           }),
                     );
-                  })
+                  }),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BlogUpdate()));
+                        },
+                        icon: Icon(Icons.update_rounded)),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BlogDelte()));
+                        },
+                        icon: Icon(Icons.delete))
+                  ],
+                ),
+              )
             ],
           ),
         ),

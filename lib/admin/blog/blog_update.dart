@@ -1,11 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:http/http.dart ' as http;
 import 'package:smart_s_test/auth/custtom_http.dart';
-import 'package:smart_s_test/constant/constant.dart';
 
 class BlogUpdate extends StatelessWidget {
   TextEditingController idController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +23,7 @@ class BlogUpdate extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               height: 30,

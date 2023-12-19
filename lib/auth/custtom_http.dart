@@ -44,7 +44,7 @@ class CusttomHttp {
 
   static update(var id) async {
     var head = Map<String, String>();
-    head = CusttomHttp.getHeadersWithToken();
+    head = await CusttomHttp.getHeadersWithToken();
     String url = '$baseUrl/admin/blog-news/update/${id}';
     var response = await http.post(Uri.parse(url), headers: head);
     try {
@@ -60,15 +60,16 @@ class CusttomHttp {
 
   static delete(var id) async {
     String url = '$baseUrl/admin/blog-news/delete/${id}';
-    var response = await http.post(Uri.parse(url),
-        headers: CusttomHttp.getHeadersWithToken());
-    if (response.statusCode == 200) {
-      return showToast("delated");
+    var response = await http.delete(Uri.parse(url),
+        headers: await CusttomHttp.getHeadersWithToken());
+    try {
+      if (response.statusCode == 200) {
+        return showToast("delated");
+      } else {
+        throw Text("Something error happend ");
+      }
+    } catch (e) {
+      throw (e.toString());
     }
   }
-
-  // static blogPass(String link, Map<String, dynamic> map)async {
-  //      await http.post(Uri.parse(link),
-  //       headers: CusttomHttp.getHeadersWithToken(), body: map);
-  // }
 }
